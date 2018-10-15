@@ -46,6 +46,10 @@ ORG="test"
 #15. target = terraform
 #16. 
 
+function provision_aws_infra() {
+ terraform 
+
+}
 
 function spin_k8s_cluster() {
 
@@ -130,7 +134,7 @@ function nuke_k8s_cluster() {
 
 function main() {
   
-  if [ "$#" -gt "1" ]; then
+  if [ "$#" -ne "1" ]; then
     echo ERROR: Please pass c for create or n for nuke
     exit 1
   fi

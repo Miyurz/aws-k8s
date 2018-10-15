@@ -1,0 +1,14 @@
+* **To initialise the terraform**
+
+ `terraform init --backend-config=backend.hcl`
+
+* ** Create the workspace like prod,stage,dev ** *
+  `terraform create workspace new prod|stage|dev`
+
+* **To apply the plan**
+
+ `tf apply -var-file=staging.tfvars -state=infrastructure.tfstate`
+
+* **To destroy the state**
+
+ `tf destroy -var-file=staging.tfvars -state=infrastructure.tfstate`
