@@ -1,0 +1,26 @@
+* **To exec and use your keys **
+
+  `aws-vault exec <profile_in_aws_to_assume> --no-session --assume-role=3h`
+
+* ** Ue terraform workspaces to manage environments **
+  `terraform workspace create <prod|stage>`
+  `terraform workspace select stage`
+
+* **To initialise the terraform**
+
+ `terraform init --backend-config=backend.hcl`
+
+* ** Create the workspace like prod,stage,dev ** *
+  `terraform create workspace new prod|stage|dev`
+
+* **To create/check the plan [Dry run]**
+
+ `tf plan -var-file=variables.tfvars -state=infrastructure.tfstate`
+
+* **To apply the plan**
+
+ `tf apply -var-file=variables.tfvars -state=infrastructure.tfstate`
+
+* **To destroy the state**
+
+ `tf destroy -var-file=variables.tfvars -state=infrastructure.tfstate`

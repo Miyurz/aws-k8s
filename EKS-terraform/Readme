@@ -1,0 +1,19 @@
+1. export AWS_PROFILE=dev
+2. Create bucket manually before terraform init 
+3. terraform init --backend-config=backend.hcl and do not checkin backend.hcl file into repo.git crypt it 
+4. Install aws-iam-autheticator 
+  
+If you are planning to locally use the standard Kubernetes client, kubectl, it must be at least version 1.10 to support exec authentication with usage of aws-iam-authenticator. For additional information about installation and configuration of these applications, see their official documentation. Download 
+
+ERROR: Unable to connect to the server: getting credentials: exec: exec: "aws-iam-authenticator": executable file not found in $PATH
+  
+ - curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/bin/darwin/amd64/heptio-authenticator-aws
+ - chmod +x ./aws-iam-authenticator
+ - cp ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
+ - export PATH=/usr/local/bin:$PATH
+
+5. use terraform output for kubeconfig and add it in your existing ~/.kube/config. Right now I have one for docker-for-mac and oner for GKE. This would be the third one.
+6. Run terraform output config-map-aws-auth and save the configuration into a file, e.g. config-map-aws-auth.yaml
+7. Run kubectl apply -f config-map-aws-auth.yaml
+8. You can verify the worker nodes are joining the cluster via: kubectl get nodes --watch
+

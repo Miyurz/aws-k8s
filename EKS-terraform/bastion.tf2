@@ -1,0 +1,41 @@
+
+/*
+ * Instance
+ */
+resource "aws_instance" "manager" {
+  ami                     = "${data.aws_ami.ubuntu_hvm.image_id}"
+  key_name                = "${var.keypair_name}"
+  instance_type           = "${var.manager_node_type}"
+  vpc_security_group_ids  = ["${aws_security_group.manager.id}"]
+  subnet_id               = "${module.network.dmz_subnet_ids[0]}" // First subnet
+  disable_api_termination = "${var.termination_protection}"
+
+  root_block_device {
+    volume_size = "${var.manager_drive_size}"
+  }
+
+  tags {
+    Name = "manager.${var.name_short}.${var.domain}"
+   }
+}
+
+/*
+ * Reserve a static IP address
+ */
+resource "aws_eip" "manager" {
+  instance = "${aws_instance.manager.id}"
+  vpc      = true
+}
+
+/*
+ * Create DNS record for manager pointing to static address
+ *
+ * eg: manager.stage.test.com
+ */
+resource "aws_route53_record" "manager" {
+  zone_id = "${module.network.public_zone_id}"
+  name    = "manager.${var.name_short}.${var.domain}"
+  type    = "A"
+  ttl     = "300"
+  records = ["${aws_eip.manager.public_ip}"]
+}

@@ -1,2 +1,8 @@
+# Ignore the output directory created by kops with terraform files
+
+kops-terraform/out/*
+
+.DS_Store
+.terraform/
 *.tfvars
 *.hcl
