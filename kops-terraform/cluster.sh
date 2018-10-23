@@ -2,10 +2,10 @@
 
 set -eou pipefail
 
-STATE_STORE="s3://k8s-doxel"
-CLUSTER_NAME="k8s.doxel.ai"
+STATE_STORE="s3://k8s-miyurz"
+CLUSTER_NAME="k8s.miyurz.ai"
 BASE_IMAGE="099720109477/ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-20180405"
-DNS_ZONE="k8s.doxel.ai"
+DNS_ZONE="k8s.miyurz.ai"
 
 VPC_ID="vpc-01533e0fd0e4135bc"
 #if [ -n "$NAME" ]; then

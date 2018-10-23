@@ -17,7 +17,7 @@ env:
 STAGING_TF_STATE="staging.tfstate" #Change that to http://staging.infrastructure.s3.amazonaws.com later
 PRODUCTION_TF_STATE="production.tfstate" #Change that to http://staging.infrastructure.s3.amazonaws.com later
 
-#BUCKET="doxel-eks"
+#BUCKET="miyurz-eks"
 
 test:
 	@echo I run even when you dont specify $(env)
